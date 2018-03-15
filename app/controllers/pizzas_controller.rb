@@ -51,6 +51,6 @@ class PizzasController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def pizza_params
-      params.require(:pizza).permit(:pizza_type, :cheese_id, :sauce_id, :crust_id, :size_id)
+      params.require(:pizza).permit(:pizza_type_id, :cheese_id, :sauce_id, :crust_id, :size_id)
     end
 end

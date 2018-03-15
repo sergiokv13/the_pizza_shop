@@ -1,7 +1,41 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+#Cheeses
+Cheese.create(name: "Cheddar")
+Cheese.create(name: "Swiss")
+Cheese.create(name: "Provolone")
+
+#Sauces
+Sauce.create(name: "BQB")
+Sauce.create(name: "Honey Mustard")
+Sauce.create(name: "Hot")
+Sauce.create(name: "Garlic Parmessan")
+
+#Crust
+Crust.create(name: "Thin")
+Crust.create(name: "Thick")
+Crust.create(name: "Filled with cheese")
+
+#Sizes
+Size.create(name: "Personal")
+Size.create(name: "Small")
+Size.create(name: "Medium")
+Size.create(name: "Large")
+
+
+Crust.create(name: "Thin")
+Crust.create(name: "Thick")
+Crust.create(name: "Filled with cheese")
+
+#Ingredients
+(1..15).each do
+	Ingredient.create(name: Faker::Food.ingredient)	
+end
+
+#Pizza types
+PizzaType.create(name: "Hawaiian")
+PizzaType.create(name: "Brazilian")
+PizzaType.create(name: "Veggie")
+
+#NonPizza
+NonPizza.create(name: "Spaghetti")
+NonPizza.create(name: "Salad")
+NonPizza.create(name: "SLasagna")

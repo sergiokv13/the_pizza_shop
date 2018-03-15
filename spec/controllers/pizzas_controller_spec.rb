@@ -6,9 +6,9 @@ RSpec.describe PizzasController, type: :controller do
   # Pizza. As you add validations to Pizza, be sure to
   # adjust the attributes here as well.
 
-  let(:valid_attributes)  { {pizza_type: Faker::Food, cheese_id: 1, sauce_id: 1, crust_id: 1, size_id: 1} }
+  let(:valid_attributes)  { {pizza_type_id: 1, cheese_id: 1, sauce_id: 1, crust_id: 1, size_id: 1} }
 
-  let(:invalid_attributes) { {pizza_type: nil} }
+  let(:invalid_attributes) { {pizza_type: nil, cheese_id: nil, sauce_id: nil, crust_id: nil, size_id: nil} }
 
 
   # This should return the minimal set of values that should be in the session
@@ -18,6 +18,7 @@ RSpec.describe PizzasController, type: :controller do
 
   #Set the models needed for the relation
   def set_models
+    PizzaType.create(name: "Hawaiana")
     Cheese.create(name:"Muzarela")
     Sauce.create(name: "BBQ")
     Crust.create(name: "Thin")
@@ -77,43 +78,6 @@ RSpec.describe PizzasController, type: :controller do
       it "renders a JSON response with errors for the new pizza" do
 
         post :create, params: {pizza: invalid_attributes}, session: valid_session
-        expect(response).to have_http_status(:unprocessable_entity)
-        expect(response.content_type).to eq('application/json')
-      end
-    end
-  end
-
-  describe "PUT #update" do
-
-    before(:each) do
-       set_models
-    end
-
-    context "with valid params" do
-      let(:new_attributes) { {pizza_type: Faker::Food} }
-
-      it "updates the requested pizza" do
-        pizza = Pizza.create! valid_attributes
-        past_type = pizza.pizza_type
-        put :update, params: {id: pizza.to_param, pizza: new_attributes}, session: valid_session
-        pizza.reload
-         expect(past_type).not_to be(pizza.pizza_type)
-      end
-
-      it "renders a JSON response with the pizza" do
-        pizza = Pizza.create! valid_attributes
-
-        put :update, params: {id: pizza.to_param, pizza: valid_attributes}, session: valid_session
-        expect(response).to have_http_status(:ok)
-        expect(response.content_type).to eq('application/json')
-      end
-    end
-
-    context "with invalid params" do
-      it "renders a JSON response with errors for the pizza" do
-        pizza = Pizza.create! valid_attributes
-
-        put :update, params: {id: pizza.to_param, pizza: invalid_attributes}, session: valid_session
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq('application/json')
       end

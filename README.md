@@ -19,3 +19,29 @@ Aditional the next diagrams represent part of the design.
 Use cases: https://goo.gl/Lt2yZW
 
 Class diagram: https://goo.gl/3STZ8T
+
+## Testing
+
+The following gems are used for the testing process
+
+```
+  gem 'rspec-rails', '~> 3.5' 
+  gem 'faker'
+  gem 'database_cleaner'
+  gem 'shoulda-matchers', '~> 3.1'
+```
+
+To test please run the following command
+
+
+```
+  bundle exec rspec
+```
+
+## Seeding
+
+The main data described in the exercise is generated in the seeds file. Please run the following commmand
+
+```
+  rake db:seed
+```

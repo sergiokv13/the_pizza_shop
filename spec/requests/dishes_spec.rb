@@ -3,10 +3,10 @@ require 'rails_helper'
 RSpec.describe "Dishes", type: :request do
 
 	
-	let(:valid_attributes)  { {name: "PIZZA", pizza_id: 1} }
-	let(:invalid_attributes) { {name: nil} }
+	let(:valid_attributes)  { { pizza_id: 1} }
+	let(:invalid_attributes) { {pizza_id: "trying"} }
 	#Not Pizza
-	let(:valid_attributes_exlusive)  { {name: Faker::Food} }
+	let(:valid_attributes_exlusive)  { {non_pizza_id: 1} }
 
 	#Verify Index route for dishes
 	describe "GET /dishes" do
@@ -91,17 +91,6 @@ RSpec.describe "Dishes", type: :request do
 	      	end
     	end
 
-    	context 'when the request is invalid' do
-	      
-	      	before { post '/dishes', params: {dish: invalid_attributes} }
-	     		it 'returns status code 422' do
-	        	expect(response).to have_http_status(422)
-	      	end
-
-	      	it 'returns a validation failure message' do
-	        	expect(response.body).to match("{\"name\":[\"can't be blank\"]}")
-	      	end
-    	end
 
  	end
 

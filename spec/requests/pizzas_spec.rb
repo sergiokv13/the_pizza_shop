@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "Pizzas", type: :request do
 
-  let(:valid_attributes)  { {pizza_type: Faker::Food, cheese_id: 1, sauce_id: 1, crust_id: 1, size_id: 1} }
-  let(:invalid_attributes) { {pizza_type: nil} }
+  let(:valid_attributes)  { {pizza_type_id: 1, cheese_id: 1, sauce_id: 1, crust_id: 1, size_id: 1} }
+  let(:invalid_attributes) { {pizza_type: nil,  cheese_id: nil, sauce_id: nil, crust_id: nil, size_id: nil} }
 
   #Set the models needed for the relation
   def set_models
@@ -11,6 +11,7 @@ RSpec.describe "Pizzas", type: :request do
     Sauce.create(name: "BBQ")
     Crust.create(name: "Thin")
     Size.create(name: "Small", slices: 4)
+    PizzaType.create(name: "Hawaiana")
   end
 
 	#Verify Index route for pizzas
@@ -104,7 +105,7 @@ RSpec.describe "Pizzas", type: :request do
 	      	end
 
 	      	it 'returns a validation failure message' do
-	        	expect(response.body).to match("{\"pizza_type\":[\"can't be blank\"],\"cheese\":[\"must exist\"],\"sauce\":[\"must exist\"],\"crust\":[\"must exist\"],\"size\":[\"must exist\"]}")
+	        	expect(response.body).to match("{\"cheese\":[\"must exist\"],\"sauce\":[\"must exist\"],\"crust\":[\"must exist\"],\"size\":[\"must exist\"],\"pizza_type\":[\"must exist\"]}")
 	      	end
     	end
 

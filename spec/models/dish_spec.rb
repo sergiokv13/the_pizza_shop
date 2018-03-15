@@ -2,10 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Dish, type: :model do
 
-	let(:valid_attributes)  { {name: Faker::Food} }
-
-	#Verify presence
-	it { should validate_presence_of(:name) }
+ 	 let(:valid_attributes)  { { pizza_id: 1} }
 
 	#Verify first state set
 	it "should set state attribute" do
@@ -15,6 +12,9 @@ RSpec.describe Dish, type: :model do
 
 	#Verify relation with Pizza
 	it { should belong_to(:pizza) }
+
+	#Verify relation with NonPizza
+	it { should belong_to(:non_pizza) }
 
 
 end
