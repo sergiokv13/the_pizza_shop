@@ -1,8 +1,18 @@
 class Dish < ApplicationRecord
+
+	validate :order_dish_validation
+
+
 	#The relation as belong is made to avoid data redundancy in the pizza table
 	belongs_to :pizza, optional: true
 	belongs_to :non_pizza, optional: true
 	
+	#Validate that exists a dish for the order
+	def order_dish_validation
+	    if pizza_id == nil && non_pizza_id == nil
+	      errors.add(:dish, "No dish in the order")
+	    end
+	  end
 	
 	#Set the default value for state of a dish 
 	after_create do
