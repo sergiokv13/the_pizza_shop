@@ -15,14 +15,6 @@ RSpec.describe Dish, type: :model do
 
 	#Verify relation with Pizza
 	it { should belong_to(:pizza) }
-	#Verify relation with Cheese
-	it { should belong_to(:cheese) }
-	#Verify relation with Cheese
-	it { should belong_to(:sauce) }
-	#Verify relation with Cheese
-	it { should belong_to(:crust) }
-	#Verify relation with Cheese
-	it { should belong_to(:size) }
 
 
 end

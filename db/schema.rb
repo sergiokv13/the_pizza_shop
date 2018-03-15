@@ -30,16 +30,16 @@ ActiveRecord::Schema.define(version: 20180315053501) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "pizza_id"
-    t.integer "cheese_id"
-    t.integer "sauce_id"
-    t.integer "crust_id"
-    t.integer "size_id"
   end
 
   create_table "pizzas", force: :cascade do |t|
     t.string "pizza_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "cheese_id"
+    t.integer "sauce_id"
+    t.integer "crust_id"
+    t.integer "size_id"
   end
 
   create_table "sauces", force: :cascade do |t|
