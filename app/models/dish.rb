@@ -4,6 +4,8 @@ class Dish < ApplicationRecord
 	belongs_to :pizza, optional: true
 	belongs_to :cheese, optional: true
 	belongs_to :sauce, optional: true
+	belongs_to :crust, optional: true
+	belongs_to :size, optional: true
 	
 	#Set the default value for state of a dish 
 	before_validation do

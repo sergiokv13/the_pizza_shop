@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "Dishes", type: :request do
 
 	
-	let(:valid_attributes)  { {name: Faker::Food, pizza_id: 1} }
+	let(:valid_attributes)  { {name: "PIZZA", pizza_id: 1} }
 	let(:invalid_attributes) { {name: nil} }
 	#Not Pizza
 	let(:valid_attributes_exlusive)  { {name: Faker::Food, pizza_id: 1, cheese_id: 1, sauce_id: 1} }

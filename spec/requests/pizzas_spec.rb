@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Pizzas", type: :request do
 
-	let(:valid_attributes)  { {pizza_type: Faker::Food} }
+	let(:valid_attributes)  { {pizza_type: "HAWAIANA"} }
   	let(:invalid_attributes) { {pizza_type: nil} }
 
 	#Verify Index route for pizzas

@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "Sauces", type: :request do
 
 	
-	let(:valid_attributes)  { {name: Faker::Food} }
+	let(:valid_attributes)  { {name: "BBQ"} }
 	let(:invalid_attributes) { {name: nil} }
 
 	#Verify Index route for sauces
