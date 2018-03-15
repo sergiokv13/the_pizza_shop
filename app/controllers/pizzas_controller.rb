@@ -1,5 +1,5 @@
 class PizzasController < ApplicationController
-  before_action :set_pizza, only: [:show, :update, :destroy]
+  before_action :set_pizza, only: [:show, :update, :destroy, :add_ingredient,:ingredients]
 
   # GET /pizzas
   def index
@@ -38,6 +38,18 @@ class PizzasController < ApplicationController
     @pizza.destroy
   end
 
+  # GET Add ingredient /ingredients/ingredient_id
+  def add_ingredient
+    @pizza.add_ingredient(params[:ingredient_id])
+    render json: @pizza
+  end
+
+
+  # GET pizza/:id/ingredients
+  def ingredients
+    render json: @pizza.ingredients
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_pizza
@@ -51,6 +63,6 @@ class PizzasController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def pizza_params
-      params.require(:pizza).permit(:pizza_type_id, :cheese_id, :sauce_id, :crust_id, :size_id)
+      params.require(:pizza).permit(:pizza_type_id, :cheese_id, :sauce_id, :crust_id, :size_id, :ingredient_id)
     end
 end

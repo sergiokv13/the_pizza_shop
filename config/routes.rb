@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get '/dishes/next_state/:id/:delivery' => "dishes#next_state"
+  get '/pizza/:id/ingredients' => "pizzas#ingredients"
+  get '/pizza/:id/:ingredient_id' => "pizzas#add_ingredient"
+
   resources :non_pizzas
   resources :pizza_types
   resources :ingredients

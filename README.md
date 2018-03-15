@@ -696,6 +696,64 @@ If it gets necessary to administrate the sizes of the pizza you can:
 
 ```
 
+
+### Orders
+
+View all orders
+
+**View all orders**
+
+
+```
+  URL:        		/dishes
+```
+
+```
+  MEHTOD:     		GET
+```
+
+```
+ CURL EXAMPLE:	    curl http://localhost:3000/dishes
+
+```
+
+
+```
+ STATUS:	    	200: Succeed
+ 					400: Bad request
+```
+
+
+With the id of the dish order you can change the state
+
+**Change state of order**
+
+
+```
+  URL:        		/dishes/next_state/:id/:delivery
+```
+
+```
+  MEHTOD:     		GET
+```
+
+```
+ URL PARAMS:     	"id":[INTEGER]
+ 					":delivery":[BOOLEAN]
+```
+
+```
+ CURL EXAMPLE:	    curl http://localhost:3000/dishes/next_state/1/true
+
+```
+
+
+```
+ STATUS:	    	200: Succeed
+ 					400: Bad request
+ 					404: Not found
+```
+
 ## Client
 
 
@@ -873,6 +931,274 @@ The following requests are for the pizza shop client
 
 ```
  CURL EXAMPLE:	    curl http://localhost:3000/ingredients
+
+```
+
+
+```
+ STATUS:	    	201: Created
+ 					400: Bad request
+```
+
+
+
+### NON PIZZA Order
+
+After viewing the menu /non_pizzas you can order as follows.
+
+**Order non pizza**
+
+
+```
+  URL:        		/dishes
+```
+
+```
+  MEHTOD:     		POST
+```
+
+```
+ DATA PARAMS:     	
+	 				{
+	 					"dishes":
+						{
+							"non_pizza_id":[INTEGER]
+						}
+	 				}
+```
+
+```
+ CURL EXAMPLE:	    curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d ' {"dish":{"non_pizza_id":1}}'  http://localhost:3000/dishes
+
+```
+
+```
+ RESPONSE:	    	{
+ 						"id":1,"state":"In preparation",
+ 						"created_at":"2018-03-15T17:50:14.295Z",
+ 						"updated_at":"2018-03-15T17:50:14.295Z",
+ 						"pizza_id":null,
+ 						"non_pizza_id":1
+ 					}
+
+```
+
+```
+ STATUS:	    	201: Created
+ 					400: Bad request
+ 					422: Invalid attributes
+
+```
+
+
+With the id of your dish order you can review the state
+
+**Review state of non pizza**
+
+
+```
+  URL:        		/dishes/:id
+```
+
+```
+  MEHTOD:     		GET
+```
+
+```
+ URL PARAMS:     	"id":[INTEGER]
+```
+
+```
+ CURL EXAMPLE:	    curl http://localhost:3000/dishes/1
+
+```
+
+
+```
+ STATUS:	    	201: Created
+ 					400: Bad request
+```
+
+
+### PIZZA Order
+
+After viewing the /pizza_types, /cheeses, /sizes, /sauces, /crusts, /ingredients menus you can order a pizza as follows:
+
+**Order pizza - Step 1**
+
+Build your pizza 
+
+```
+  URL:        		/pizzas
+```
+
+```
+  MEHTOD:     		POST
+```
+
+```
+ DATA PARAMS:     	
+	 				{
+	 					"pizzas":
+						{
+							"pizza_type_id":[INTEGER],
+							"cheese_id":[INTEGER],
+							"size_id":[INTEGER],
+							"sauce_id":[INTEGER],
+							"crust_id":[INTEGER],
+						}
+	 				}
+```
+
+```
+ CURL EXAMPLE:	    curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d ' {"pizza": {"pizza_type_id": 1 , "cheese_id": 1 , "size_id": 1 , "sauce_id": 1 , "crust_id" : 1}}'  http://localhost:3000/pizzas
+
+```
+
+```
+ RESPONSE:	    	{
+ 						"id":1,
+ 						"created_at":"2018-03-15T18:11:56.372Z",
+ 						"updated_at":"2018-03-15T18:11:56.372Z",
+ 						"cheese_id":1,
+ 						"sauce_id":1,
+ 						"crust_id":1,
+ 						"size_id":1,
+ 						"pizza_type_id":1
+ 					}
+
+```
+
+```
+ STATUS:	    	201: Created
+ 					400: Bad request
+ 					422: Invalid attributes
+
+```
+
+
+**Order pizza - Step 2 (Optional)**
+
+Add ingredients to your pizza
+
+```
+  URL:        		/pizza/:id/:ingredient_id
+```
+
+```
+  MEHTOD:     		GET
+```
+
+```
+ URL PARAMS:     	"id":[INTEGER]
+ 					"ingredient_id":[INTEGER]
+```
+
+```
+ CURL EXAMPLE:	    curl http://localhost:3000/pizza/1/1
+
+```
+
+```
+ STATUS:	    	201: Created
+ 					400: Bad request
+```
+
+
+
+**Order pizza - Step 3**
+
+Order the pizza you made
+
+
+```
+  URL:        		/dishes
+```
+
+```
+  MEHTOD:     		POST
+```
+
+```
+ DATA PARAMS:     	
+	 				{
+	 					"dishes":
+						{
+							"pizza_id":[INTEGER]
+						}
+	 				}
+```
+
+```
+ CURL EXAMPLE:	    curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d ' {"dish":{"pizza_id":1}}'  http://localhost:3000/dishes
+
+```
+
+```
+ RESPONSE:	    	{
+ 						"id":1,"state":"In preparation",
+ 						"created_at":"2018-03-15T17:50:14.295Z",
+ 						"updated_at":"2018-03-15T17:50:14.295Z",
+ 						"pizza_id":1,
+ 						"non_pizza_id":null
+ 					}
+
+```
+
+```
+ STATUS:	    	201: Created
+ 					400: Bad request
+ 					422: Invalid attributes
+
+```
+
+
+With the id of your dish order you can review the state
+
+**Review state of pizza**
+
+
+```
+  URL:        		/dishes/:id
+```
+
+```
+  MEHTOD:     		GET
+```
+
+```
+ URL PARAMS:     	"id":[INTEGER]
+```
+
+```
+ CURL EXAMPLE:	    curl http://localhost:3000/dishes/1
+
+```
+
+
+```
+ STATUS:	    	201: Created
+ 					400: Bad request
+```
+
+
+**Review ingredients of pizza**
+
+
+```
+  URL:        		/pizza/:id/ingredients
+```
+
+```
+  MEHTOD:     		GET
+```
+
+```
+ URL PARAMS:     	"id":[INTEGER]
+```
+
+```
+ CURL EXAMPLE:	    curl http://localhost:3000/pizza/1/ingredients
 
 ```
 

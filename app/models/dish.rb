@@ -5,7 +5,19 @@ class Dish < ApplicationRecord
 	
 	
 	#Set the default value for state of a dish 
-	before_validation do
+	after_create do
 	   self.state = "In preparation"
 	end
+
+	#Function to change state to the next one when ended process
+	#delivery is boolean
+	def next_state (delivery)
+		if self.state == "Box it" && delivery then self.state = "Delivery" end
+		if self.state == "Box it" && !delivery then self.state = "Dispatched" end
+		if self.state == "Cut it" then self.state = "Box it" end
+		if self.state == "Bake it" then self.state = "Cut it" end
+		if self.state == "In preparation" then self.state = "Bake it" end
+		self.save
+	end		
+	
 end

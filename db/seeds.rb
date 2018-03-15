@@ -15,10 +15,10 @@ Crust.create(name: "Thick")
 Crust.create(name: "Filled with cheese")
 
 #Sizes
-Size.create(name: "Personal")
-Size.create(name: "Small")
-Size.create(name: "Medium")
-Size.create(name: "Large")
+Size.create(name: "Personal", slices: 2)
+Size.create(name: "Small", slices: 4)
+Size.create(name: "Medium", slices: 6)
+Size.create(name: "Large" , slices: 8)
 
 
 Crust.create(name: "Thin")

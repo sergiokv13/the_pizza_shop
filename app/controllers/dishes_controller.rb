@@ -1,5 +1,5 @@
 class DishesController < ApplicationController
-  before_action :set_dish, only: [:show, :update, :destroy]
+  before_action :set_dish, only: [:show, :update, :destroy, :next_state]
 
   # GET /dishes
   def index
@@ -38,6 +38,12 @@ class DishesController < ApplicationController
     @dish.destroy
   end
 
+  # POST Next status /dishes/next_status/1/true(false)
+  def next_state
+    @dish.next_state(params[:delivery])
+    render json: @dish
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_dish
@@ -51,6 +57,6 @@ class DishesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def dish_params
-      params.require(:dish).permit(:non_pizza_id, :pizza_id)
+      params.require(:dish).permit(:non_pizza_id, :pizza_id, :delivery)
     end
 end

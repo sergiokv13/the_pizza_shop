@@ -7,4 +7,10 @@ class Pizza < ApplicationRecord
 	belongs_to :pizza_type
 
 	has_and_belongs_to_many :ingredients
+
+	def add_ingredient(ingredient_id)
+		ingredient = Ingredient.find(ingredient_id)		
+		self.ingredients.push(ingredient)
+	end
+	
 end
