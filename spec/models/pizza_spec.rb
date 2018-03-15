@@ -12,5 +12,7 @@ RSpec.describe Pizza, type: :model do
 	it { should belong_to(:crust) }
 	#Verify relation with Cheese
 	it { should belong_to(:size) }
+	#Verify relation with Ingrefients
+	it { should have_and_belong_to_many(:ingredients) }
 
 end

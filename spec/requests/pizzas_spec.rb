@@ -2,11 +2,23 @@ require 'rails_helper'
 
 RSpec.describe "Pizzas", type: :request do
 
-	let(:valid_attributes)  { {pizza_type: "HAWAIANA", cheese_id: 1, sauce_id: 1} }
-  	let(:invalid_attributes) { {pizza_type: nil} }
+  let(:valid_attributes)  { {pizza_type: Faker::Food, cheese_id: 1, sauce_id: 1, crust_id: 1, size_id: 1} }
+  let(:invalid_attributes) { {pizza_type: nil} }
+
+  #Set the models needed for the relation
+  def set_models
+    Cheese.create(name:"Muzarela")
+    Sauce.create(name: "BBQ")
+    Crust.create(name: "Thin")
+    Size.create(name: "Small", slices: 4)
+  end
 
 	#Verify Index route for pizzas
 	describe "GET /pizzas" do
+
+		before(:each) do
+       		set_models
+    	end
 
 		context 'when there is data' do
 		    it "get status 200" do
@@ -30,6 +42,10 @@ RSpec.describe "Pizzas", type: :request do
 
 	#Verify Show route for pizzas
 	describe 'GET /pizzas/:id' do
+
+		 before(:each) do
+	       set_models
+	    end
 
 	    context 'when the record exists' do
 	      it 'returns the pizza' do
@@ -63,6 +79,10 @@ RSpec.describe "Pizzas", type: :request do
  	#Verify Show route for Post
 	describe 'POST /pizzas' do
 
+		 before(:each) do
+	       set_models
+	    end
+
 	    context 'when the request is valid' do
 	        before { post '/pizzas', params: {pizza: valid_attributes} }
 
@@ -84,7 +104,7 @@ RSpec.describe "Pizzas", type: :request do
 	      	end
 
 	      	it 'returns a validation failure message' do
-	        	expect(response.body).to match("{\"pizza_type\":[\"can't be blank\"]}")
+	        	expect(response.body).to match("{\"pizza_type\":[\"can't be blank\"],\"cheese\":[\"must exist\"],\"sauce\":[\"must exist\"],\"crust\":[\"must exist\"],\"size\":[\"must exist\"]}")
 	      	end
     	end
 
@@ -92,6 +112,11 @@ RSpec.describe "Pizzas", type: :request do
 
  	# Test suite for DELETE /pizzas/:id
   	describe 'DELETE /pizzas/:id' do 
+
+  		 before(:each) do
+	       set_models
+	    end
+
     	it 'returns status code 204' do
     		pizza = Pizza.create! valid_attributes
     		delete "/pizzas/1"
