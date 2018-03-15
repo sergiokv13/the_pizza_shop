@@ -17,4 +17,5 @@ The project uses JSON for the communication.
 Aditional the next diagrams represent part of the design.
 
 Use cases: https://goo.gl/Lt2yZW
+
 Class diagram: https://goo.gl/3STZ8T
