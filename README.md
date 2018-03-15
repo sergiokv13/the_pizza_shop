@@ -46,11 +46,227 @@ The main data described in the exercise is generated in the seeds file. Please r
   rake db:seed
 ```
 
-##Administration
+## Administration
 
 The following requests are for the pizza manager to administrate the pizza shop.
 
-###Cheeses
+
+### Non Pizzas
+
+If it gets necessary to administrate the pizza types you can:
+
+**Create**
+
+```
+  URL:        		/non_pizzas
+```
+
+```
+  MEHTOD:     		POST
+```
+
+```
+ DATA PARAMS:     	
+	 				{
+	 					"non_pizzas":
+						{
+							"name":[STRING]
+						}
+	 				}
+```
+
+```
+ CURL EXAMPLE:	    curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d ' {"non_pizza":{"name":"Spaghetti"}}'  http://localhost:3000/non_pizzas
+
+```
+
+```
+ RESPONSE:	    	{
+ 						"id":1,"name":"Spaghetti",
+ 						"created_at":"2018-03-15T17:18:53.173Z",
+ 						"updated_at":"2018-03-15T17:18:53.173Z"
+ 					}
+
+```
+
+```
+ STATUS:	    	201: Created
+ 					400: Bad request
+ 					422: Invalid attributes
+
+```
+
+**Delete**
+
+```
+ URL:        		/non_pizzas/:id
+```
+
+```
+ MEHTOD:     		DELETE
+```
+
+```
+ URL PARAMS:     	"id":[INTEGER]
+```
+
+```
+ CURL:	     		curl -X "DELETE" http://localhost:3000/non_pizzas/1
+```
+
+```
+ STATUS:	    	204: Deleted
+ 					400: Bad request
+ 					404: Not found
+
+```
+
+**Put**
+
+```
+ URL:        		/non_pizzas/:id
+```
+
+```
+ MEHTOD:     		PUT
+```
+
+```
+ URL PARAMS:     	"id":[INTEGER]
+```
+
+```
+ DATA PARAMS:     	
+	 				{
+	 					"non_pizza":
+						{
+							"name":[STRING]
+						}
+	 				}
+```
+
+```
+ CURL:	     		curl -v -H "Accept: application/json" -H "Content-type: application/json" -X PUT -d ' {"non_pizza":{"name":"Lasagna"}}'  http://localhost:3000/non_pizzas/1
+
+```
+
+```
+ STATUS:	    	200: Succeed
+ 					400: Bad request
+ 					404: Not found
+
+```
+
+
+
+### Pizza Types
+
+If it gets necessary to administrate the pizza types you can:
+
+**Create**
+
+```
+  URL:        		/pizza_types
+```
+
+```
+  MEHTOD:     		POST
+```
+
+```
+ DATA PARAMS:     	
+	 				{
+	 					"pizza_types":
+						{
+							"name":[STRING]
+						}
+	 				}
+```
+
+```
+ CURL EXAMPLE:	    curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d ' {"pizza_type":{"name":"HAWAIANA"}}'  http://localhost:3000/pizza_types
+
+```
+
+```
+ RESPONSE:	    	{
+ 						"id":1,"name":"HAWAIANA",
+ 						"created_at":"2018-03-15T17:18:53.173Z",
+ 						"updated_at":"2018-03-15T17:18:53.173Z"
+ 					}
+
+```
+
+```
+ STATUS:	    	201: Created
+ 					400: Bad request
+ 					422: Invalid attributes
+
+```
+
+**Delete**
+
+```
+ URL:        		/pizza_types/:id
+```
+
+```
+ MEHTOD:     		DELETE
+```
+
+```
+ URL PARAMS:     	"id":[INTEGER]
+```
+
+```
+ CURL:	     		curl -X "DELETE" http://localhost:3000/pizza_types/1
+```
+
+```
+ STATUS:	    	204: Deleted
+ 					400: Bad request
+ 					404: Not found
+
+```
+
+**Put**
+
+```
+ URL:        		/pizza_types/:id
+```
+
+```
+ MEHTOD:     		PUT
+```
+
+```
+ URL PARAMS:     	"id":[INTEGER]
+```
+
+```
+ DATA PARAMS:     	
+	 				{
+	 					"pizza_type":
+						{
+							"name":[STRING]
+						}
+	 				}
+```
+
+```
+ CURL:	     		curl -v -H "Accept: application/json" -H "Content-type: application/json" -X PUT -d ' {"pizza_type":{"name":"VEGGAN"}}'  http://localhost:3000/pizza_types/1
+
+```
+
+```
+ STATUS:	    	200: Succeed
+ 					400: Bad request
+ 					404: Not found
+
+```
+
+
+### Cheeses
 
 If it gets necessary to administrate the cheeses you can:
 
@@ -157,7 +373,7 @@ If it gets necessary to administrate the cheeses you can:
 
 ```
 
-###Crusts
+### Crusts
 
 If it gets necessary to administrate the crusts you can:
 
@@ -264,7 +480,7 @@ If it gets necessary to administrate the crusts you can:
 ```
 
 
-###Sauce
+### Sauce
 
 If it gets necessary to administrate the sauces you can:
 
@@ -370,219 +586,8 @@ If it gets necessary to administrate the sauces you can:
 
 ```
 
-###Pizza Types
 
-If it gets necessary to administrate the pizza types you can:
-
-**Create**
-
-```
-  URL:        		/pizza_types
-```
-
-```
-  MEHTOD:     		POST
-```
-
-```
- DATA PARAMS:     	
-	 				{
-	 					"pizza_types":
-						{
-							"name":[STRING]
-						}
-	 				}
-```
-
-```
- CURL EXAMPLE:	    curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d ' {"pizza_type":{"name":"HAWAIANA"}}'  http://localhost:3000/pizza_types
-
-```
-
-```
- RESPONSE:	    	{
- 						"id":1,"name":"HAWAIANA",
- 						"created_at":"2018-03-15T17:18:53.173Z",
- 						"updated_at":"2018-03-15T17:18:53.173Z"
- 					}
-
-```
-
-```
- STATUS:	    	201: Created
- 					400: Bad request
- 					422: Invalid attributes
-
-```
-
-**Delete**
-
-```
- URL:        		/pizza_types/:id
-```
-
-```
- MEHTOD:     		DELETE
-```
-
-```
- URL PARAMS:     	"id":[INTEGER]
-```
-
-```
- CURL:	     		curl -X "DELETE" http://localhost:3000/pizza_types/1
-```
-
-```
- STATUS:	    	204: Deleted
- 					400: Bad request
- 					404: Not found
-
-```
-
-**Put**
-
-```
- URL:        		/pizza_types/:id
-```
-
-```
- MEHTOD:     		PUT
-```
-
-```
- URL PARAMS:     	"id":[INTEGER]
-```
-
-```
- DATA PARAMS:     	
-	 				{
-	 					"pizza_type":
-						{
-							"name":[STRING]
-						}
-	 				}
-```
-
-```
- CURL:	     		curl -v -H "Accept: application/json" -H "Content-type: application/json" -X PUT -d ' {"pizza_type":{"name":"VEGGAN"}}'  http://localhost:3000/pizza_types/1
-
-```
-
-```
- STATUS:	    	200: Succeed
- 					400: Bad request
- 					404: Not found
-
-```
-
-###Non Pizzas
-
-If it gets necessary to administrate the pizza types you can:
-
-**Create**
-
-```
-  URL:        		/non_pizzas
-```
-
-```
-  MEHTOD:     		POST
-```
-
-```
- DATA PARAMS:     	
-	 				{
-	 					"non_pizzas":
-						{
-							"name":[STRING]
-						}
-	 				}
-```
-
-```
- CURL EXAMPLE:	    curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d ' {"non_pizza":{"name":"Spaghetti"}}'  http://localhost:3000/non_pizzas
-
-```
-
-```
- RESPONSE:	    	{
- 						"id":1,"name":"Spaghetti",
- 						"created_at":"2018-03-15T17:18:53.173Z",
- 						"updated_at":"2018-03-15T17:18:53.173Z"
- 					}
-
-```
-
-```
- STATUS:	    	201: Created
- 					400: Bad request
- 					422: Invalid attributes
-
-```
-
-**Delete**
-
-```
- URL:        		/non_pizzas/:id
-```
-
-```
- MEHTOD:     		DELETE
-```
-
-```
- URL PARAMS:     	"id":[INTEGER]
-```
-
-```
- CURL:	     		curl -X "DELETE" http://localhost:3000/non_pizzas/1
-```
-
-```
- STATUS:	    	204: Deleted
- 					400: Bad request
- 					404: Not found
-
-```
-
-**Put**
-
-```
- URL:        		/non_pizzas/:id
-```
-
-```
- MEHTOD:     		PUT
-```
-
-```
- URL PARAMS:     	"id":[INTEGER]
-```
-
-```
- DATA PARAMS:     	
-	 				{
-	 					"non_pizza":
-						{
-							"name":[STRING]
-						}
-	 				}
-```
-
-```
- CURL:	     		curl -v -H "Accept: application/json" -H "Content-type: application/json" -X PUT -d ' {"non_pizza":{"name":"Lasagna"}}'  http://localhost:3000/non_pizzas/1
-
-```
-
-```
- STATUS:	    	200: Succeed
- 					400: Bad request
- 					404: Not found
-
-```
-
-###Size
+### Size
 
 If it gets necessary to administrate the sizes of the pizza you can:
 
@@ -689,4 +694,190 @@ If it gets necessary to administrate the sizes of the pizza you can:
  					400: Bad request
  					404: Not found
 
+```
+
+## Client
+
+
+The following requests are for the pizza shop client 
+
+### Cheeses
+
+
+**View Non pizza dishes**
+
+```
+  URL:        		/non_pizzas
+```
+
+```
+  MEHTOD:     		GET
+```
+
+
+```
+ CURL EXAMPLE:	    curl http://localhost:3000/non_pizzas
+
+```
+
+
+```
+ STATUS:	    	201: Created
+ 					400: Bad request
+```
+
+### Pizzazs
+
+
+**View types of pizza**
+
+```
+  URL:        		/pizza_types
+```
+
+```
+  MEHTOD:     		GET
+```
+
+
+```
+ CURL EXAMPLE:	    curl http://localhost:3000/pizza_types
+
+```
+
+
+```
+ STATUS:	    	201: Created
+ 					400: Bad request
+```
+
+
+
+
+
+### Cheeses
+
+
+**View Cheeses**
+
+```
+  URL:        		/cheeses
+```
+
+```
+  MEHTOD:     		GET
+```
+
+
+```
+ CURL EXAMPLE:	    curl http://localhost:3000/cheeses
+
+```
+
+
+```
+ STATUS:	    	201: Created
+ 					400: Bad request
+```
+
+### Sizes
+
+
+**View Sizes**
+
+```
+  URL:        		/sizes
+```
+
+```
+  MEHTOD:     		GET
+```
+
+
+```
+ CURL EXAMPLE:	    curl http://localhost:3000/sizes
+
+```
+
+
+```
+ STATUS:	    	201: Created
+ 					400: Bad request
+```
+
+### Crusts
+
+
+**View Crusts**
+
+```
+  URL:        		/crusts
+```
+
+```
+  MEHTOD:     		GET
+```
+
+
+```
+ CURL EXAMPLE:	    curl http://localhost:3000/crusts
+
+```
+
+
+```
+ STATUS:	    	201: Created
+ 					400: Bad request
+```
+
+
+### Sauces
+
+**View Sauces**
+
+```
+  URL:        		/sauces
+```
+
+```
+  MEHTOD:     		GET
+```
+
+
+```
+ CURL EXAMPLE:	    curl http://localhost:3000/sauces
+
+```
+
+
+```
+ STATUS:	    	201: Created
+ 					400: Bad request
+```
+
+
+
+### Ingredients
+
+
+**View Ingredients**
+
+```
+  URL:        		/ingredients
+```
+
+```
+  MEHTOD:     		GET
+```
+
+
+```
+ CURL EXAMPLE:	    curl http://localhost:3000/ingredients
+
+```
+
+
+```
+ STATUS:	    	201: Created
+ 					400: Bad request
 ```
