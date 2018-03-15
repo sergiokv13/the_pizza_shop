@@ -2,11 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Dish, type: :model do
 
- 	 let(:valid_attributes)  { { pizza_id: 1} }
-
 	#Verify first state set
 	it "should set state attribute" do
-		dish = Dish.create! valid_attributes
+		dish = Dish.create! 
 		expect(dish).to have_attributes(:state => "In preparation")
 	end
 

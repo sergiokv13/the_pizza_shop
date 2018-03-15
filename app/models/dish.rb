@@ -8,5 +8,4 @@ class Dish < ApplicationRecord
 	before_validation do
 	   self.state = "In preparation"
 	end
-
 end
