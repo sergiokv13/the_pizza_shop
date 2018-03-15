@@ -13,4 +13,7 @@ RSpec.describe Dish, type: :model do
 		expect(dish).to have_attributes(:state => "In preparation")
 	end
 
+	#Verify relation with Pizza
+	it { should belong_to(:pizza) }
+
 end

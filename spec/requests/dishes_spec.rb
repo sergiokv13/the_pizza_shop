@@ -2,13 +2,15 @@ require 'rails_helper'
 
 RSpec.describe "Dishes", type: :request do
 
-	let(:valid_attributes)  { {name: Faker::Food} }
-  	let(:invalid_attributes) { {name: nil} }
+	
+	let(:valid_attributes)  { {name: Faker::Food, pizza_id: 1} }
+	let(:invalid_attributes) { {name: nil} }
+	#Not Pizza
+	let(:valid_attributes_exlusive)  { {name: Faker::Food, pizza_id: 1} }
 
 	#Verify Index route for dishes
 	describe "GET /dishes" do
-
-		context 'When there is data' do
+		context 'when there is data' do
 		    it "get status 200" do
 		    	(0..10).each do
 		    		dish = Dish.create! valid_attributes
@@ -63,7 +65,20 @@ RSpec.describe "Dishes", type: :request do
  	#Verify Show route for Post
 	describe 'POST /dishes' do
 
-	    context 'when the request is valid' do
+	    context 'when the request is valid and not pizza' do
+	        before { post '/dishes', params: {dish: valid_attributes_exlusive} }
+
+	     	it 'creates a dish' do
+	     		json = JSON.parse(response.body)
+	        	expect(json['id']).to eq(1)
+	      	end
+
+	      	it 'returns status code 201' do
+	        	expect(response).to have_http_status(201)
+	      	end
+    	end
+
+    	context 'when the request is pizza' do
 	        before { post '/dishes', params: {dish: valid_attributes} }
 
 	     	it 'creates a dish' do
