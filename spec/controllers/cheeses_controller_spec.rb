@@ -65,7 +65,7 @@ RSpec.describe CheesesController, type: :controller do
         past_name = cheese.name
         put :update, params: {id: cheese.to_param, cheese: new_attributes}, session: valid_session
         cheese.reload
-         expect(past_name).not_to be(cheese.name)
+        expect(past_name).not_to be(cheese.name)
       end
 
       it "renders a JSON response with the cheese" do
